@@ -7,7 +7,7 @@ IS_FLAG = 2
 IS_MINE = 4
 
 
-def init_matrix(row, col, defaults=0):
+def make_matrix(row, col, defaults=0):
     matrix = []
     for i in range(row):
         matrix.append([])
@@ -23,12 +23,12 @@ class Board:
         self.board_h = height
         self.mines_amount = mines
         self.unused_flags = self.mines_amount
-        self.tnumbers = init_matrix(height, width)
+        self.tnumbers = make_matrix(height, width)
         self._init_tiles()
         self.game_over = False
 
     def _init_tiles(self):
-        self.tile_states = init_matrix(self.board_h, self.board_w)
+        self.tile_states = make_matrix(self.board_h, self.board_w)
         self._place_mine()
 
 

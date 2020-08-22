@@ -3,7 +3,7 @@ from setuptools import find_packages, setup
 
 setuptools.setup(
     name="minesweeper",
-    version=versioneer.get_versions()['version']
+    version=versioneer.get_versions()['version'],
     url="https://github.com/drunkwcodes/minesweeper",
     licenise='MIT',
 

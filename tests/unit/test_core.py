@@ -1,14 +1,11 @@
 # Sample Test passing with nose and pytest
 import pytest
+from minesweeper.core import *
 
-def test_pass():
-    assert True, "dummy sample test"
-
-from ...minesweeper import *
+def test_Board():
     b = Board()
-    b.tile_states
+    s1 = b.tile_states
     b.open_adjacent_tiles(7,0)
-    b.tile_states
     b.reset()
-    b.tile_states
+    assert b.tile_states == s1
 
