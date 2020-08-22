@@ -28,9 +28,8 @@ class Board:
 
     def _init_tiles(self):
         self.tile_states = make_matrix(self.board_h, self.board_w)
-        self._place_mine()
 
-    def _place_mine(self):
+        # place mines
         counter = 0
         while counter < self.mines_amount:
             x = randint(0, self.board_h - 1)
@@ -42,6 +41,7 @@ class Board:
 
     def _get_adjacent_tiles(self, x, y):
         adjacent_tiles = []
+
         if not self.is_out_of_bound(x - 1, y - 1):
             adjacent_tiles.append((x - 1, y - 1))
         if not self.is_out_of_bound(x - 1, y):
@@ -62,8 +62,8 @@ class Board:
         return adjacent_tiles
 
     def _increment_adjacent_tnumber(self, x, y):
-        for x, y in self._get_adjacent_tiles(x, y):
-            self.tnumbers[x][y] += 1
+        for a, b in self._get_adjacent_tiles(x, y):
+            self.tnumbers[a][b] += 1
 
     def is_out_of_bound(self, x, y):
         return x < 0 or x >= self.board_w or y < 0 or y >= self.board_h
@@ -97,6 +97,7 @@ class Board:
     def reset(self):
         self.unused_flags = self.mines_amount
         self.game_over = False
+
         for i in range(self.board_h):
             for j in range(self.board_w):
                 self.tile_states[i][j] &= ~IS_OPENED
@@ -124,3 +125,5 @@ class Game:
 
     def restart(self, width, height, mines):
         self.tiles = Board(width, height, mines)
+        self._start_time = 0
+        self._end_time = 0
