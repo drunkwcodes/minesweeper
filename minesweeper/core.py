@@ -17,7 +17,6 @@ def make_matrix(row, col, defaults=0):
 
 
 class Board:
-
     def __init__(self, width=8, height=8, mines=10):
         self.board_w = width
         self.board_h = height
@@ -30,7 +29,6 @@ class Board:
     def _init_tiles(self):
         self.tile_states = make_matrix(self.board_h, self.board_w)
         self._place_mine()
-
 
     def _place_mine(self):
         counter = 0
@@ -62,11 +60,10 @@ class Board:
             adjacent_tiles.append((x + 1, y + 1))
 
         return adjacent_tiles
- 
+
     def _increment_adjacent_tnumber(self, x, y):
         for x, y in self._get_adjacent_tiles(x, y):
             self.tnumbers[x][y] += 1
-
 
     def is_out_of_bound(self, x, y):
         return x < 0 or x >= self.board_w or y < 0 or y >= self.board_h
@@ -88,12 +85,14 @@ class Board:
                     self.open_adjacent_tiles(a, b)
 
     def put_flag(self, x, y):
-        self.tile_states[x][y] |= IS_FLAG
-        self.unused_flags -= 1
+        if not self.tile_states[x][y] & IS_FLAG:
+            self.tile_states[x][y] |= IS_FLAG
+            self.unused_flags -= 1
 
     def take_flag(self, x, y):
-        self.tile_states[x][y] &= ~IS_FLAG
-        self.unused_flags += 1
+        if self.tile_states[x][y] & IS_FLAG:
+            self.tile_states[x][y] &= ~IS_FLAG
+            self.unused_flags += 1
 
     def reset(self):
         self.unused_flags = self.mines_amount
@@ -105,14 +104,13 @@ class Board:
 
 
 class Game:
-
     def __init__(self, board):
         self._start_time = 0
         self._end_time = 0
         self.tiles = board
         self.over = self.tiles.game_over
         self.reset = self.tiles.reset
-    
+
     def start(self):
         self._start_time = datetime.now()
 
