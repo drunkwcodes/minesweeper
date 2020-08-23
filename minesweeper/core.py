@@ -34,7 +34,7 @@ class Board:
         while counter < self.mines_amount:
             x = randint(0, self.board_h - 1)
             y = randint(0, self.board_w - 1)
-            if not (self.tile_states[x][y] & IS_MINE):
+            if not self.tile_states[x][y] & IS_MINE:
                 self.tile_states[x][y] |= IS_MINE
                 counter += 1
                 self._increment_adjacent_tnumber(x, y)
