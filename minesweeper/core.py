@@ -1,4 +1,17 @@
-"""Tile generation and Game Flow"""
+"""
+
+Tile generation and Game Flow
+
+
+
+
+
+Reference:
+
+https://github.com/joelekstrom/libminesweeper/blob/48357a90ebc0104344e27eca180f6892965c1a03/lib/minesweeper.c
+"""
+
+
 from datetime import datetime
 from random import randint
 
